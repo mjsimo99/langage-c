@@ -3,13 +3,20 @@
 
 int main()
 {
-    int N1,N2;
-    float S ;
-    printf("Enter the first number :");
-    scanf("%d",&N1);
-    printf("Enter the second number :");
-    scanf("%d",&N2);
-    S=N1*N2;
-    printf("The result of multiplication is : %.2f \n",S) ;
+    int A,B,S,SS,P,DIV;
+    printf("Entrer First Number :\n");
+    scanf("%d",&A);
+    printf("Entrer Second Number :\n");
+    scanf("%d",&B);
+
+    S=A+B;
+    SS=A-B;
+    P=A*B;
+    DIV=A/B;
+    printf("%d + %d = %d \n",A,B,S);
+    printf("%d - %d = %d \n",A,B,SS);
+    printf("%d * %d = %d \n",A,B,P);
+    printf("%d / %d = %d \n",A,B,DIV);
+
     return 0;
 }
