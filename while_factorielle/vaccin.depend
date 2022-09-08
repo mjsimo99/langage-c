@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1662635862 source:c:\users\adm\desktop\vaccin\main.c
+	<stdio.h>
+	<stdlib.h>
+
