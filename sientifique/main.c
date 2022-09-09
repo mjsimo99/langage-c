@@ -3,7 +3,7 @@
     #include <math.h>
     int main()
     {
-        goto PRINTTHIS;
+
     int rep ,repe ;
 
         do{
@@ -42,11 +42,7 @@
         default:
             printf("Choisissez une seule de ces valeurs : + - * / \n");
 
-        }
-        PRINTTHIS:
-        printf("voulez-vous continuer ? Si oui, choisissez un nombre different 0 : ");
-        scanf("%d",&continu);
-        }while(continu!=0);
+
 
 
         return 0;
