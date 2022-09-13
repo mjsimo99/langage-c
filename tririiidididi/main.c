@@ -28,7 +28,7 @@ do{
     for(r=n-1;r>=0;r--){
     repeti(n++,r);
     }
-    for(int bb = 0;bb<4;bb++){
+    for(int bb = 0;bb<3;bb++){
         for( int aa = 0; aa < n-1; aa++)
             printf(" ");
         printf("*\n");
