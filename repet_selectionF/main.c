@@ -37,5 +37,6 @@ int main()
     for(i=0;i<n;i++)
         printf("T[%d]=%d \n",i,T[i]);
 
+
 return 0;
 }

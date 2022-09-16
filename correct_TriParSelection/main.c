@@ -9,7 +9,7 @@ void TriParSelection(int *T,int n)
         min=i;
         for(j=i+1;j<n;j++)
         {
-           if(T[j]>T[min])
+           if(T[j]<T[min])
                 min=j;
         }
 
