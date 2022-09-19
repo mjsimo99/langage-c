@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1663604554 source:c:\users\adm\desktop\gestion de pharmasie\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
