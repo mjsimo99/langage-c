@@ -1,16 +1,21 @@
 #include <stdio.h>
+#include <stdlib.h>
+int factorielle(int F , int n){
+   int   i  ;
 
+    F=1;
+    for(i=1;i<=n;i++)
+    F=F*i;
+    return F ;
+}
 int main()
 {
-  int nbr, i, f = 1;
+int   n ;
+printf("Enter un nombre : ");
+scanf("%d",&n);
 
-  printf("Entrez un nombre pour calculer sa factorielle\n");
-  scanf("%d", &nbr);
+F=factorielle(F , n);
 
-  for (i = 0; i <= nbr; i++)
-    f = f * i;
-
-  printf("Factorielle de %d = %d\n", nbr, f);
-
-  return 0;
+printf("la factorielle de  %d = %d",n,F);
+    return 0;
 }

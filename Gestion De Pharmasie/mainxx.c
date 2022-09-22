@@ -3,11 +3,6 @@
 #include <string.h>
 #include <time.h>
 static int i ;
-static int taille = 0 ;
-static int ta = 0;
-
-//structer
-
 typedef struct {
 int code ;
 char nom[50];
@@ -15,21 +10,20 @@ int quantite ;
 float prix ;
 
 }produit;
-
+int moyenne;
 typedef struct  {
     int annee, mois, jour;
 }Date;
-
 typedef struct  {
     float priTTC;
     Date date;
 }achat;
 
 produit a[1000];
+static int taille = 0 ;
 achat pa[1000];
-
-//function declaration
-
+static int ta = 0;
+//function
 void ajouter_produit(produit a[]);
 void ajouter_autre_produit(produit a[], int nbp);
 void afficher(produit a[]);
@@ -37,7 +31,7 @@ void TRI_PAR_alphabetique(produit a[]);
 void  TRI_PAR_PRIX(produit a[]);
 void Acheter_produit(produit a[]);
 int recherch_CODE(produit a[]);
-int recherch_Quantite(produit a[]);
+void recherch_Quantite(produit a[]);
 void Etat_du_stock( produit a[]);
 void Alimenter_le_stock(produit a[]);
 void Supprimer_les_produits(produit a[]);
@@ -50,11 +44,10 @@ int main()
 {
 int nbp   ;
 int c ; //choisir
+
 int close = 0 ;
-int q , b; //choisir
-
+int q , b;
 //menu
-
     while(close == 0){
 puts("\t***********************************    Gestion de Pharmacie    ***********************************\n\n");
 
@@ -84,6 +77,7 @@ do{
         case 1:
             ajouter_produit(a);
             taille++;
+            printf("%d\n",taille);
             system("cls");
             break;
         case 2:
@@ -97,6 +91,7 @@ puts("\t***********************************    Ajouter plusieur produits    ****
             }while(nbp>100 || nbp<1);
             ajouter_autre_produit(a,nbp);
             taille+=nbp;
+            printf("%d\n",taille);
             system("cls");
             break;
         case 3:
@@ -119,7 +114,7 @@ puts("\t**************************************    Tri des produit    ***********
                         system("cls");
                         break;
                     case 2 :
-                        TRI_PAR_PRIX(a);
+                         TRI_PAR_PRIX(a);
                         getch();
                         system("cls");
                         break;
@@ -129,9 +124,6 @@ puts("\t**************************************    Tri des produit    ***********
 
         case 5:
                 Acheter_produit(a);
-                getch();
-                system("cls");
-
         break;
         case 6:
             puts("\t**************************************    Acheter produit    **************************************\n\n");
@@ -186,12 +178,10 @@ puts("\t**************************************    Tri des produit    ***********
     }
     return 0;
 }
-// function definition
 //**************************************************
 //function ajout un produit num 1 dans la menu
 void ajouter_produit(produit a[] )
 {
-
     puts("\t**************************************    Ajout un produit    **************************************\n\n");
     printf("\t\t=>DONNER DES INFORMATIONS SUR LE PRODUIT QUI AJOUTER . \n");
     printf("\t\t\tnom de produit : ");
@@ -204,11 +194,13 @@ void ajouter_produit(produit a[] )
     scanf("%f",&a[taille].prix);
 
 
+
 }
 //**************************************************
 //function ajout un autre produit num 2 dans la menu
 void ajouter_autre_produit(produit a[], int nbp)
 {
+printf("%d\n", taille);
 for(i=taille;i<taille+nbp;i++)
 {
     printf("\t\t\tnom de produit %d : ",i+1);
@@ -303,16 +295,16 @@ void Acheter_produit(produit a[]){
     {
         if(a[i].code == code)
             {
-                printf("\t\t=>LE NOMBRE DE PRODUIT QUE VOUS VOULER ACHETER : ");
+                printf("\t\t=>LE NOMBRE DE PRODUIT QUE VOUS VOULER ACHETER ");
                 scanf("%d", &NBA);
                 if(NBA<=a[i].quantite)
                 {
                     a[i].quantite -= NBA ;
 
+                    achat temp;
                     float prixTTC = a[i].prix+(a[i].prix*0.15);
                     prixTTC*=NBA;
                     pa[ta].priTTC = prixTTC;
-
                     time_t t = time(NULL);
                     struct tm tm = *localtime(&t);
                     pa[ta].date.annee = tm.tm_year + 1900;
@@ -339,39 +331,29 @@ int recherch_CODE(produit a[])
 
     printf("\t\t\t=>>entrer le code de produit : ");
     scanf("%d",&Rc);
-    puts("\n");
     for(i=0;i<taille;i++)
     {
         if(a[i].code == Rc)
             {
-        puts("\t\t***********************************************\n");
-        printf( "\t\tLE PRDOUIT QUE VOUS RECHERCHEZ EST :\n\t\t\tNOM :  %s \n\t\t\tCODE : %d \n\t\t\tQUANTITE : %d \n\t\t\tPRIX : %.2f \n",a[i].nom,a[i].code,a[i].quantite,a[i].prix);
+        printf( "LE PROUIT QUE VOUS RECHERCHEZ EST \n NOM :  %s \n CODE : %d \n QUANTITE : %d \n  PRIX : %.2f \n",a[i].nom,a[i].code,a[i].quantite,a[i].prix);
         return i;
         }
     }
     return -1;
 }
-//fonction recherch par quantite
+//    FONCTION DE RECHERCHER PAR QUANTITE
 
-int recherch_Quantite( produit a[])
+void recherch_Quantite( produit a[])
 {
     int i,j;
     int Rq;
-    printf("\t\t\t==>enter la quantite de produit  : ");
+    printf("ENTRER LA QUANTITE DE PRODUIT  : ");
     scanf("%d",&Rq);
-    puts("\n");
-
     for(i=0;i<taille;i++)
     {
         if(a[i].quantite == Rq)
-        {
-        puts("\t\t***********************************************\n");
-        printf( "\t\tLE PRDOUIT QUE VOUS RECHERCHEZ EST :\n\t\t\tNOM :  %s \n\t\t\tCODE : %d \n\t\t\tQUANTITE : %d \n\t\t\tPRIX : %.2f \n",a[i].nom,a[i].code,a[i].quantite,a[i].prix);
-        return i;
-        }
+        printf( "LE PROUIT QUE VOUS RECHERCHEZ EST \n NOM :  %s \n CODE : %d \n QUANTITE : %d \n PRIX : %.2f \n",a[i].nom,a[i].code,a[i].quantite,a[i].prix);
     }
-    return -1;
-
 }
 //**************************************************
 //function etat du stock
@@ -405,7 +387,7 @@ void Alimenter_le_stock( produit a[])
         if(a[i].code == Al)
         {
             printf("\t=>COMBIEN VOULEZ-VOUS AJOUTER DANS LE PRODUIT : ");
-            scanf("%d",&v);
+            scanf("%d", &v);
             a[i].quantite += v;
             return;
         }
@@ -425,7 +407,6 @@ puts("\t***********************************    Supprimer les produits    *******
     scanf("%d", &Dele);
 
 
-
     for (i = 0; i < taille; i++)
     {
         if (a[i].code == Dele)
@@ -435,18 +416,18 @@ puts("\t***********************************    Supprimer les produits    *******
                 a[j] = a[j + 1];
             }
             taille--;
+            printf("%d\n",taille);
             getch();
 
         }
     }
-//*******************************
-//function statique de vente ;
+    //afficher(a,taille);
 }
 void Statistique_de_vente(produit a[])
 {
 puts("\t***********************************    Statistique de vente    ***********************************\n\n");
 
-    float total = 0, moyenne = 0;
+    float total = 0, moyen = 0;
     float min = pa[0].priTTC;
     float max = pa[0].priTTC;
     int count = 0; //le nombre de lea produit achat aujourdhui
@@ -469,15 +450,10 @@ for(i = 0; i < ta; i++)
         }
     }
 }
-moyenne = total/count;
-puts("\t\t   --------------------------------------------------------");
-printf("\t\t\t==>le total des prix des produits vendus : %.2f \n", total);
-printf("\t\t\t ==>la moyenne des prix des produits vendus : %.2f \n", moyenne);
-printf("\t\t\t  ==>le min des prix des produits vendus : %.2f \n", min);
-printf("\t\t\t   ==>le max des prix des produits vendus : %.2f \n\n", max);
-printf("\t\t\t    ===> LA DATE D'ACHAT EST : \n\n");
-printf("\t\t\t          ==> annee : %d  \n",tm.tm_year + 1900);
-printf("\t\t\t          ==> mois : %d  \n",tm.tm_mon + 1);
-printf("\t\t\t          ==> jour : %d  \n",tm.tm_mday);
-puts("\t\t   --------------------------------------------------------");
+moyen = total/count;
+
+printf("\t\t\t==>le total est %.2f \n", total);
+printf("\t\t\t ==>le moyen est %.2f \n", moyen);
+printf("\t\t\t  ==>le min est %.2f \n", min);
+printf("\t\t\t   ==>le max est %.2f \n", max);
 }

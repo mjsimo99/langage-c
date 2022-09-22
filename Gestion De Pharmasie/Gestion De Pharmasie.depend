@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1663685548 source:c:\users\adm\desktop\gestion de pharmasie\main.c
+1663855169 source:c:\users\adm\desktop\gestion de pharmasie\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+	<time.h>
 
